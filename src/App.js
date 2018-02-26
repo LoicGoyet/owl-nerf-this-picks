@@ -1,19 +1,43 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Stage from './Components/Stage'
+import Picks from './Components/Picks'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      stages: null
+    }
+
+    return
+  }
+
+  async componentDidMount() {
+    const scheduleApi = await fetch('https://api.overwatchleague.com/schedule')
+    const schedule = await scheduleApi.json()
+    const { stages } = schedule.data
+
+    return this.setState({ stages })
+  }
+
   render() {
+    const { stages } = this.state
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <main className="container-fluid">
+        {!stages && (
+          <h1>Stages not loaded</h1>
+        )}
+
+        {stages && (
+          <Picks stages={stages}/>
+        )}
+
+        {stages && stages.map(stage => (
+          <Stage key={stage.id} stage={stage}/>
+        ))}
+      </main>
     );
   }
 }
