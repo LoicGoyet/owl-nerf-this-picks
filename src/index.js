@@ -1,18 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from "react"
+import ReactDOM from "react-dom"
 
-class HelloMessage extends React.Component {
+import GameList from "./components/GameList"
+
+class App extends React.Component {
     render() {
         return (
             <div>
-                <div className="container">
-                    <h1>Hello {this.props.name}</h1>
-                </div>
+                <GameList gameList={["hello", "world"]}/>
             </div>
         )
     }
 }
 
-let App = document.getElementById("app");
-
-ReactDOM.render(<HelloMessage name="Yomi"/>, App);
+ReactDOM.render(<App/>, document.getElementById("app"));
