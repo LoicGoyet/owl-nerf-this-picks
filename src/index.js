@@ -1,16 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
 
-import GameList from "./components/GameList"
+import store from "./store"
+import App from "./components/App"
 
-class App extends React.Component {
-    render() {
-        return (
-            <div>
-                <GameList gameList={["hello", "world"]}/>
-            </div>
-        )
-    }
-}
-
-ReactDOM.render(<App/>, document.getElementById("app"));
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById("app")
+);
