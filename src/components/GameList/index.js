@@ -1,11 +1,11 @@
 import React from "react";
 
-import Game from "../Game";
+import Match from '../../containers/Match'
 
 import style from './style'
 
 const GameList = ({gameList}) => (
-    gameList.map((game, index) => <Game game={game} key={index}/>)
+    gameList.map((gameId, index) => <Match gameId={gameId} key={index}/>)
 )
 
 export default GameList
