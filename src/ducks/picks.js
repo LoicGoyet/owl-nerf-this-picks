@@ -1,18 +1,17 @@
-import {
-    PICKS_PREDICTION
-} from '../actions/picks'
+// Actions
+const PREDICT = 'nf-picks/picks/PREDICT'
 
-const defaultState = [
-    {
-        gameId: 1,
-        logo: "Fusion",
-        althiron: "Uprising",
-    },
-]
 
-const picks = (state = defaultState, action) => {
+// Reducer
+const defaultState = [{
+    gameId: 1,
+    logo: "Fusion",
+    althiron: "Uprising",
+}]
+
+export default function reducer (state = defaultState, action) {
     switch (action.type) {
-        case PICKS_PREDICTION:
+        case PREDICT:
             const otherPicks = state.filter(pick => pick.gameId !== action.gameId)
             const pick = {
                 gameId: action.gameId,
@@ -29,4 +28,13 @@ const picks = (state = defaultState, action) => {
     }
 }
 
-export default picks
+
+// Action Creators
+export function predict(gameId, chronicler, winner) {
+    return {
+        type: PREDICT,
+        gameId,
+        chronicler,
+        winner,
+    }
+}

@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import * as picksActions from '../actions/picks'
+import * as picksActions from '../ducks/picks'
 import GameBox from '../components/GameBox'
 
 const mapStateToProps = (state, ownProps) => ({})
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    prediction: (gameId, chronicler, winner) => dispatch(picksActions.prediction(gameId, chronicler, winner)),
+    predict: (gameId, chronicler, winner) => dispatch(picksActions.predict(gameId, chronicler, winner)),
 })
 
 const Match = connect(
@@ -16,7 +16,7 @@ const Match = connect(
 )((props) => (
     <GameBox
         gameId={props.gameId}
-        prediction={props.prediction}
+        predict={props.predict}
     />
 ))
 

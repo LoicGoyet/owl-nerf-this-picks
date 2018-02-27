@@ -4,8 +4,8 @@ import style from './style'
 
 class GameBox extends React.Component {
     componentDidMount() {
-        const { prediction, gameId } = this.props
-        return prediction(gameId, 'logo', 'Dynasty')
+        const { predict, gameId } = this.props
+        return predict(gameId, 'logo', 'Dynasty')
     }
 
     render() {
