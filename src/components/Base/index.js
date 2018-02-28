@@ -5,11 +5,16 @@ class Base extends React.Component {
     componentDidMount() {
         this.props.fetchPicks()
         this.props.fetchSchedule()
+        this.props.fetchTeams()
         return true
     }
 
     render() {
-        return <GameList gameList={[1]}/>
+        return (
+            <div>
+                <GameList gameList={[1]}/>
+            </div>
+        )
     }
 }
 
