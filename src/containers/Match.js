@@ -15,7 +15,7 @@ const Match = connect(
     mapDispatchToProps,
 )((props) => (
     <GameBox
-        gameId={props.gameId}
+        match={props.match}
         predict={props.predict}
     />
 ))

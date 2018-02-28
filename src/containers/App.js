@@ -7,7 +7,9 @@ import * as teamsActions from '../ducks/teams'
 import Base from '../components/Base'
 import GameList from '../components/GameList'
 
-const mapStateToProps = (state, ownProps) => ({})
+const mapStateToProps = (state, ownProps) => ({
+    stages: (state.schedule.data.stages || []).filter(stage => stage.enabled)
+})
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     fetchPicks: () => dispatch(picksActions.fetch()),
