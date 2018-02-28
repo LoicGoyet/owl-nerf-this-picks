@@ -3,7 +3,9 @@ import GameList from "../GameList"
 
 class Base extends React.Component {
     componentDidMount() {
-        return this.props.fetch()
+        this.props.fetchPicks()
+        this.props.fetchSchedule()
+        return true
     }
 
     render() {
