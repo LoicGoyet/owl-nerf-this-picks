@@ -5,7 +5,7 @@ import * as scheduleActions from '../ducks/schedule'
 import * as picksActions from '../ducks/picks'
 import * as teamsActions from '../ducks/teams'
 import Base from '../components/Base'
-import GameList from '../components/GameList'
+import MatchesList from '../components/MatchesList'
 
 const mapStateToProps = (state, ownProps) => ({
     stages: (state.schedule.data.stages || []).filter(stage => stage.enabled)

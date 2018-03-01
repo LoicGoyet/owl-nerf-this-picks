@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import * as picksActions from '../ducks/picks'
-import GameBox from '../components/GameBox'
+import MatchBox from '../components/MatchBox'
 
 const mapStateToProps = (state, ownProps) => ({})
 
@@ -14,7 +14,7 @@ const Match = connect(
     mapStateToProps,
     mapDispatchToProps,
 )((props) => (
-    <GameBox
+    <MatchBox
         match={props.match}
         predict={props.predict}
     />

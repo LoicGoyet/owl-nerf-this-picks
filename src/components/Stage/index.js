@@ -1,6 +1,6 @@
 import React from "react";
 
-import GameList from '../GameList'
+import MatchesList from '../MatchesList'
 
 class Stage extends React.Component {
     constructor(props) {
@@ -41,7 +41,7 @@ class Stage extends React.Component {
                 {activeWeek != null && (
                     <div>
                         <h3>{activeWeek.name}</h3>
-                        <GameList matches={activeWeek.matches}/>
+                        <MatchesList matches={activeWeek.matches}/>
                     </div>
                 )}
             </section>

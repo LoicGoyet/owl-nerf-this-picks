@@ -1,5 +1,5 @@
 import React from "react"
-import GameList from "../GameList"
+import MatchesList from "../MatchesList"
 import Stage from "../Stage"
 
 class Base extends React.Component {
