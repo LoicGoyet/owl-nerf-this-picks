@@ -1,7 +1,6 @@
 import React from 'react'
 
 const FinalBoxScore = ({scores}) => {
-
     return (
         <div>
             {Object.keys(scores).map(chronicler => (

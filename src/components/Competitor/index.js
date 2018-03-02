@@ -68,13 +68,29 @@ const Competitor = ({ competitor, background, score, winner, matchId, predict, m
             <Logo src={icon} alt={name}/>
             <Name>{name}</Name>
             {['logo', 'althi'].map(chronicler => {
-                const picked = matchPicks[chronicler] === id;
+                const pick = matchPicks[chronicler] || {}
+                const picked = pick.winner === id;
+
+                let points = pick.points || 0;
+                let futurePoints = 1
+                if (points == 2 && picked) {
+                    futurePoints = 0
+                } else if (points == 1 && picked) {
+                    futurePoints = 2
+                }
+
+                let bgColor = 'rgba(0, 0, 0, 0.05)'
+                if (picked && points == 1) {
+                    bgColor = 'rgba(0, 160, 234, 0.9)'
+                } else if (picked && points == 2) {
+                    bgColor = 'rgba(255, 137, 0, 0.9)'
+                }
 
                 return (
                     <Pick
                         key={`match-${matchId}--competitor-${id}--chronicler-${chronicler}`}
-                        onClick={() => predict(matchId, chronicler, picked ? null : id)}
-                        bgcolor={picked ? 'rgba(0, 160, 234, 0.9)' : 'rgba(0, 0, 0, 0.05)'}
+                        onClick={() => predict(matchId, chronicler, id, futurePoints)}
+                        bgcolor={bgColor}
                     >
                         {chronicler.charAt(0).toUpperCase()}
                     </Pick>

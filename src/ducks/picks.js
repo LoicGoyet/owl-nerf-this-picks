@@ -19,7 +19,11 @@ export default function reducer (state = [], action) {
             const pick = {
                 gameId: action.gameId,
                 ...state.find(pick => pick.gameId === action.gameId),
-                [action.chronicler]: action.winner,
+                [action.chronicler]: {
+                    ...state[action.chronicler],
+                    winner: action.winner,
+                    points: action.points,
+                },
             }
 
             return [
@@ -39,12 +43,13 @@ export function fetch() {
     }
 }
 
-export function predict(gameId, chronicler, winner) {
+export function predict(gameId, chronicler, winner, points = 1) {
     return {
         type: PREDICT,
         gameId,
         chronicler,
         winner,
+        points,
     }
 }
 

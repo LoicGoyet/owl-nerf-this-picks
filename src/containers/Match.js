@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    predict: (gameId, chronicler, winner) => dispatch(picksActions.predict(gameId, chronicler, winner)),
+    predict: (gameId, chronicler, winner, points) => dispatch(picksActions.predict(gameId, chronicler, winner, points)),
 })
 
 const Match = connect(

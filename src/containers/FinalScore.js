@@ -16,12 +16,15 @@ const mapStateToProps = (state, ownProps) => {
 
     return {
         scores: matches.reduce((scores, match) => {
-            const picks = state.picks.find(pick => pick.gameId === match.id) || {}
+            const picks = state.picks.find(pick => pick.gameId === match.id) || {logo: {}, althi: {}}
             const winner = match.winner ? match.winner.id : 0
 
+            const logoPick = picks.logo || {}
+            const althiPick = picks.althi || {}
+
             return {
-                logo: scores.logo + (1 * (winner === picks.logo)),
-                althi: scores.althi+ (1 * (winner === picks.althi)),
+                logo: scores.logo + ((logoPick.points || 0) * (winner === logoPick.winner || 0)),
+                althi: scores.althi + ((althiPick.points || 0) * (winner === althiPick.winner || 0)),
             }
         }, {logo: 0, althi: 0})
     }
