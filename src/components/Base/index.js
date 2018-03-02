@@ -1,6 +1,33 @@
 import React from "react"
+import { injectGlobal } from 'styled-components'
+
 import MatchesList from "../MatchesList"
 import Stage from "../Stage"
+
+injectGlobal`
+    @font-face {
+        font-family: 'Industry';
+        src: url('./dist/public/fonts/industry-medium-webfont.woff2') format("woff2"),
+             url('./dist/public/fonts/industry-medium-webfont.woff') format("font-woff");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Industry';
+        src: url('./dist/public/fonts/industry-bold-webfont.woff2') format("woff2"),
+             url('./dist/public/fonts/industry-bold-webfont.woff') format("font-woff");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+
+    html {
+        font-family: "Industry", Helvetica Neue, Helvetica, Arial, sans-serif;
+    }
+`;
 
 class Base extends React.Component {
     constructor(props) {
@@ -31,11 +58,15 @@ class Base extends React.Component {
     }
 
     render() {
-        const { stages } = this.props
+        const { stages, loadings } = this.props
         const { activeStage } = this.state
 
         return (
             <div>
+                {Object.keys(loadings).map(state =>
+                    loadings[state] && <p key={`loading-${state}`}>loading {state}</p>
+                )}
+
                 {stages.length > 0 && (
                     <div>
                         <div>

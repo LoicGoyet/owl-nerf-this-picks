@@ -8,7 +8,11 @@ import Base from '../components/Base'
 import MatchesList from '../components/MatchesList'
 
 const mapStateToProps = (state, ownProps) => ({
-    stages: (state.schedule.data.stages || []).filter(stage => stage.enabled)
+    stages: (state.schedule.data.stages || []).filter(stage => stage.enabled),
+    loadings: {
+        schedule: state.schedule.loading,
+        teams: state.teams.loading,
+    },
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
