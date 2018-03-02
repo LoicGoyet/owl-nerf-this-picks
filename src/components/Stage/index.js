@@ -11,11 +11,11 @@ class Stage extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillUpdate(nextProps) {
         const { weeks } = nextProps.stage
         const { activeWeek } = this.state
 
-        if (weeks.length > 0) {
+        if (weeks.length > 0 && !activeWeek) {
             return this.setState({activeWeek: weeks[0]})
         }
     }

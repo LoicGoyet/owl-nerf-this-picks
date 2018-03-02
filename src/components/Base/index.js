@@ -1,6 +1,7 @@
 import React from "react"
 import { injectGlobal } from 'styled-components'
 
+import FinalScore from '../../containers/FinalScore'
 import MatchesList from "../MatchesList"
 import Stage from "../Stage"
 
@@ -26,6 +27,14 @@ injectGlobal`
 
     html {
         font-family: "Industry", Helvetica Neue, Helvetica, Arial, sans-serif;
+        background-color: rgb(20, 10, 67);
+        color: white;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
     }
 `;
 
@@ -66,6 +75,8 @@ class Base extends React.Component {
                 {Object.keys(loadings).map(state =>
                     loadings[state] && <p key={`loading-${state}`}>loading {state}</p>
                 )}
+
+                <FinalScore/>
 
                 {stages.length > 0 && (
                     <div>
