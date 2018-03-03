@@ -7,6 +7,7 @@ import Stage from "../Stage"
 import Button from '../Button'
 import ButtonsList from '../ButtonsList'
 import Logo from '../Logo'
+import ToggleSwitch from '../ToggleSwitch'
 
 injectGlobal`
     @font-face {
@@ -128,6 +129,7 @@ class Base extends React.Component {
                 )}
 
                 <FinalScore/>
+                <ToggleSwitch/>
 
                 {stages.length > 0 && (
                     <div>
