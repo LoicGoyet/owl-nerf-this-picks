@@ -54,7 +54,7 @@ class Base extends React.Component {
     }
 
     componentDidUpdate() {
-        const { stages } = this.props
+        const stages = this.props.stages.filter(stage => stage.name !== "Présaison")
         const { activeStage } = this.state
 
         if (stages.length > 0 && !activeStage) {
@@ -67,8 +67,9 @@ class Base extends React.Component {
     }
 
     render() {
-        const { stages, loadings } = this.props
+        const { loadings } = this.props
         const { activeStage } = this.state
+        const stages = this.props.stages.filter(stage => stage.name !== "Présaison")
 
         return (
             <div>

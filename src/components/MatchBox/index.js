@@ -33,11 +33,12 @@ const Info = styled.div`
     color: white;
     font-size: 0.7em;
     padding: 0.2em 0.6em;
-    /* margin-right: ${competitorHeight * 3}rem; */
 `
 
 const MatchBox = ({ predict, match, matchPicks }) => {
     const { competitors, id, startDate, scores, winner, startDateTS } = match
+
+    if (competitors[0] == null || competitors[1] == null) return null
 
     return (
         <Wrapper>
