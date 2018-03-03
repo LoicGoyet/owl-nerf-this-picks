@@ -1,6 +1,9 @@
 import React from "react";
+import styled from 'styled-components';
 
 import MatchesList from '../MatchesList'
+import Button from '../Button'
+import ButtonsList from '../ButtonsList'
 
 class Stage extends React.Component {
     constructor(props) {
@@ -11,11 +14,15 @@ class Stage extends React.Component {
         }
     }
 
-    componentWillUpdate(nextProps) {
+    componentWillReceiveProps(nextProps) {
         const { weeks } = nextProps.stage
         const { activeWeek } = this.state
 
-        if (weeks.length > 0 && !activeWeek) {
+        const isActiveWeekInWeeks = weeks.find(week => {
+            return week === activeWeek;
+        })
+
+        if (weeks.length > 0 && (!activeWeek || !isActiveWeekInWeeks)) {
             return this.setState({activeWeek: weeks[0]})
         }
     }
@@ -30,19 +37,22 @@ class Stage extends React.Component {
 
         return (
             <section>
-                <h2>{name}</h2>
-
-                {weeks.length > 0 && weeks.map(week => (
-                    <button key={week.id} onClick={e => this.updateShownWeek(week)}>
-                        {week.name}
-                    </button>
-                ))}
+                {weeks.length > 0 && (
+                    <ButtonsList>
+                        {weeks.map(week => (
+                            <Button
+                                key={week.id}
+                                onClick={e => this.updateShownWeek(week)}
+                                active={week === activeWeek}
+                            >
+                                {week.name}
+                            </Button>
+                        ))}
+                    </ButtonsList>
+                )}
 
                 {activeWeek != null && (
-                    <div>
-                        <h3>{activeWeek.name}</h3>
-                        <MatchesList matches={activeWeek.matches}/>
-                    </div>
+                    <MatchesList matches={activeWeek.matches}/>
                 )}
             </section>
         )

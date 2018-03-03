@@ -5,7 +5,6 @@ import Competitor, {competitorHeight} from '../Competitor'
 import moment from '../../utils/moment'
 
 const Wrapper = styled.article`
-  margin-bottom: 1rem;
 `;
 
 const LabelWrapper = styled.div`

@@ -4,6 +4,9 @@ import { injectGlobal } from 'styled-components'
 import FinalScore from '../../containers/FinalScore'
 import MatchesList from "../MatchesList"
 import Stage from "../Stage"
+import Button from '../Button'
+import ButtonsList from '../ButtonsList'
+import Logo from '../Logo'
 
 injectGlobal`
     @font-face {
@@ -29,6 +32,10 @@ injectGlobal`
         font-family: "Industry", Helvetica Neue, Helvetica, Arial, sans-serif;
         background-color: rgb(20, 10, 67);
         color: white;
+    }
+
+    body {
+        margin: 0;
     }
 
     *,
@@ -73,6 +80,8 @@ class Base extends React.Component {
 
         return (
             <div>
+                <Logo/>
+
                 {Object.keys(loadings).map(state =>
                     loadings[state] && <p key={`loading-${state}`}>loading {state}</p>
                 )}
@@ -81,13 +90,17 @@ class Base extends React.Component {
 
                 {stages.length > 0 && (
                     <div>
-                        <div>
+                        <ButtonsList>
                             {stages.map(stage => (
-                                <button key={stage.id} onClick={e => this.updateShownStage(stage)}>
+                                <Button
+                                    key={stage.id}
+                                    onClick={e => this.updateShownStage(stage)}
+                                    active={activeStage === stage}
+                                >
                                     {stage.name}
-                                </button>
+                                </Button>
                             ))}
-                        </div>
+                        </ButtonsList>
 
                         {activeStage != null && <Stage stage={activeStage}/>}
                     </div>
