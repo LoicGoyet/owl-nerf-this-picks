@@ -23,8 +23,8 @@ const mapStateToProps = (state, ownProps) => {
             const althiPick = picks.althi || {}
 
             return {
-                logo: scores.logo + ((logoPick.points || 0) * (winner === logoPick.winner || 0)),
                 althi: scores.althi + ((althiPick.points || 0) * (winner === althiPick.winner || 0)),
+                logo: scores.logo + ((logoPick.points || 0) * (winner === logoPick.winner || 0)),
             }
         }, {logo: 0, althi: 0})
     }

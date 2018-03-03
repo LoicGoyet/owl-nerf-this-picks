@@ -1,5 +1,5 @@
 import React from "react"
-import { injectGlobal } from 'styled-components'
+import styled, { injectGlobal } from 'styled-components'
 
 import FinalScore from '../../containers/FinalScore'
 import MatchesList from "../MatchesList"
@@ -11,8 +11,8 @@ import Logo from '../Logo'
 injectGlobal`
     @font-face {
         font-family: 'Industry';
-        src: url('./dist/public/fonts/industry-medium-webfont.woff2') format("woff2"),
-             url('./dist/public/fonts/industry-medium-webfont.woff') format("font-woff");
+        src: url('./public/fonts/industry-medium-webfont.woff2') format("woff2"),
+             url('./public/fonts/industry-medium-webfont.woff') format("font-woff");
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -20,8 +20,8 @@ injectGlobal`
 
     @font-face {
         font-family: 'Industry';
-        src: url('./dist/public/fonts/industry-bold-webfont.woff2') format("woff2"),
-             url('./dist/public/fonts/industry-bold-webfont.woff') format("font-woff");
+        src: url('./public/fonts/industry-bold-webfont.woff2') format("woff2"),
+             url('./public/fonts/industry-bold-webfont.woff') format("font-woff");
         font-weight: 700;
         font-style: normal;
         font-display: swap;
@@ -45,6 +45,47 @@ injectGlobal`
     }
 `;
 
+const LoadingMessage = styled.p`
+    text-align: center;
+
+    & a {
+        color: red;
+    }
+`
+
+const Signature = styled.p`
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.75rem;
+    margin: 3rem auto 1rem;
+    text-transform: uppercase;
+`
+
+const SignatureLink = styled.a`
+    color: rgb(236, 9, 114);
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: currentColor;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+
+    &:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+`
+
 class Base extends React.Component {
     constructor(props) {
         super(props)
@@ -61,7 +102,7 @@ class Base extends React.Component {
     }
 
     componentDidUpdate() {
-        const stages = this.props.stages.filter(stage => stage.name !== "Présaison")
+        const stages = this.props.stages.filter(stage => stage.name != "Présaison")
         const { activeStage } = this.state
 
         if (stages.length > 0 && !activeStage) {
@@ -79,11 +120,11 @@ class Base extends React.Component {
         const stages = this.props.stages.filter(stage => stage.name !== "Présaison")
 
         return (
-            <div>
+            <main>
                 <Logo/>
 
                 {Object.keys(loadings).map(state =>
-                    loadings[state] && <p key={`loading-${state}`}>loading {state}</p>
+                    loadings[state] && <LoadingMessage key={`loading-${state}`}>loading {state}...</LoadingMessage>
                 )}
 
                 <FinalScore/>
@@ -105,7 +146,9 @@ class Base extends React.Component {
                         {activeStage != null && <Stage stage={activeStage}/>}
                     </div>
                 )}
-            </div>
+
+                <Signature>Made with love by <SignatureLink href="https://github.com/LoicGoyet" target="_blank">Loïc Goyet</SignatureLink></Signature>
+            </main>
         )
     }
 }

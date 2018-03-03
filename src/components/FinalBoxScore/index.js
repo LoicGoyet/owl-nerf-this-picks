@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const StatBarContainer = styled.div`
     display: flex;
     width: 100%;
-    max-width: 750px;
     margin: 1rem auto 3rem;
 `
 
@@ -18,10 +17,10 @@ const StatBarFill = styled.div`
     position: absolute;
     top: 0;
     bottom: 0;
-    min-width: 110px;
+    min-width: 125px;
     z-index: 1;
     width: ${props => `${props.size}%`};
-    transition: width ease-in-out 300ms;
+    transition: width ease-in-out 1s;
 
     ${props => props.orientation === 'left' && `
         background-color: rgb(255, 137, 0);

@@ -67,7 +67,7 @@ const Competitor = ({ competitor, background, score, winner, matchId, predict, m
         <Wrapper border={primaryColor} background={background}>
             <Logo src={icon} alt={name}/>
             <Name>{name}</Name>
-            {['logo', 'althi'].map(chronicler => {
+            {['althi', 'logo'].map(chronicler => {
                 const pick = matchPicks[chronicler] || {}
                 const picked = pick.winner === id;
 

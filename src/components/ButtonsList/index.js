@@ -5,7 +5,10 @@ const Wrapper = styled.nav`
     display: flex;
     overflow-x: auto;
     margin-bottom: 1em;
-    justify-content: center;
+
+    @media (min-width: 35rem) {
+        justify-content: center;
+    }
 `
 
 const ButtonsList = ({children, ...props}) => (
