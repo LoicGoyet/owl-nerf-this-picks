@@ -1,16 +1,34 @@
 {
-  "name": "owl-nerf-this-picks",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "name": "owl-nerf-this-picks",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "parcel index.html",
+        "build": "parcel build index.html --no-cache",
+        "make-prod": "parcel build index.html --public-url ./"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "firebase": "^4.10.1",
+        "moment": "^2.21.0",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-redux": "^5.0.7",
+        "redux": "^3.7.2",
+        "redux-devtools-extension": "^2.13.2",
+        "redux-saga": "^0.16.0",
+        "redux-saga-firebase": "^0.12.0",
+        "styled-components": "^3.1.6"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-react": "^6.24.1"
+    }
 }
