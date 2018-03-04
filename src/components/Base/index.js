@@ -9,11 +9,17 @@ import ButtonsList from '../ButtonsList'
 import Logo from '../Logo'
 import ToggleSwitch from '../ToggleSwitch'
 
+import industryMediumWoff from "../../../assets/fonts/industry-medium-webfont.woff"
+import industryMediumWoff2 from "../../../assets/fonts/industry-medium-webfont.woff2"
+import industryBoldWoff from "../../../assets/fonts/industry-bold-webfont.woff"
+import industryBoldWoff2 from "../../../assets/fonts/industry-bold-webfont.woff2"
+
+
 injectGlobal`
     @font-face {
         font-family: 'Industry';
-        src: url('./public/fonts/industry-medium-webfont.woff2') format("woff2"),
-             url('./public/fonts/industry-medium-webfont.woff') format("font-woff");
+        src: url('${industryMediumWoff2}') format("woff2"),
+             url('${industryMediumWoff}') format("font-woff");
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -21,8 +27,8 @@ injectGlobal`
 
     @font-face {
         font-family: 'Industry';
-        src: url('./public/fonts/industry-bold-webfont.woff2') format("woff2"),
-             url('./public/fonts/industry-bold-webfont.woff') format("font-woff");
+        src: url('${industryBoldWoff2}') format("woff2"),
+             url('${industryBoldWoff}') format("font-woff");
         font-weight: 700;
         font-style: normal;
         font-display: swap;
