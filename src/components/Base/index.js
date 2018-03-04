@@ -2,55 +2,14 @@ import React from "react"
 import styled, { injectGlobal } from 'styled-components'
 
 import FinalScore from '../../containers/FinalScore'
+import BaseStyle from '../BaseStyle'
 import MatchesList from "../MatchesList"
 import Stage from "../Stage"
 import Button from '../Button'
 import ButtonsList from '../ButtonsList'
 import Logo from '../Logo'
 import ToggleSwitch from '../ToggleSwitch'
-
-import industryMediumWoff from "../../../assets/fonts/industry-medium-webfont.woff"
-import industryMediumWoff2 from "../../../assets/fonts/industry-medium-webfont.woff2"
-import industryBoldWoff from "../../../assets/fonts/industry-bold-webfont.woff"
-import industryBoldWoff2 from "../../../assets/fonts/industry-bold-webfont.woff2"
-
-
-injectGlobal`
-    @font-face {
-        font-family: 'Industry';
-        src: url('${industryMediumWoff2}') format("woff2"),
-             url('${industryMediumWoff}') format("font-woff");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'Industry';
-        src: url('${industryBoldWoff2}') format("woff2"),
-             url('${industryBoldWoff}') format("font-woff");
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-    }
-
-
-    html {
-        font-family: "Industry", Helvetica Neue, Helvetica, Arial, sans-serif;
-        background-color: rgb(20, 10, 67);
-        color: white;
-    }
-
-    body {
-        margin: 0;
-    }
-
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-    }
-`;
+import Loader from '../Loader'
 
 const LoadingMessage = styled.p`
     text-align: center;
@@ -132,12 +91,10 @@ class Base extends React.Component {
         const stages = this.props.stages.filter(stage => stage.name !== "Présaison")
 
         return (
-            <main>
+            <BaseStyle>
                 <Logo/>
 
-                {Object.keys(loadings).map(state =>
-                    loadings[state] && <LoadingMessage key={`loading-${state}`}>loading {state}...</LoadingMessage>
-                )}
+                {loadings.length > 0 && <Loader sections={loadings} fullPage/>}
 
                 <FinalScore/>
 
@@ -168,7 +125,7 @@ class Base extends React.Component {
                 )}
 
                 <Signature>Made with love by <SignatureLink href="https://github.com/LoicGoyet" target="_blank">Loïc Goyet</SignatureLink></Signature>
-            </main>
+            </BaseStyle>
         )
     }
 }

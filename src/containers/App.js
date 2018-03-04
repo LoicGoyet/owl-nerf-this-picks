@@ -8,14 +8,21 @@ import * as uiActions from '../ducks/ui'
 import Base from '../components/Base'
 import MatchesList from '../components/MatchesList'
 
-const mapStateToProps = (state, ownProps) => ({
-    stages: (state.schedule.data.stages || []).filter(stage => stage.enabled),
-    loadings: {
+const mapStateToProps = (state, ownProps) => {
+    const loadings = {
         schedule: state.schedule.loading,
         teams: state.teams.loading,
-    },
-    hideScores: state.ui.hideScores,
-})
+    }
+    return {
+        stages: (state.schedule.data.stages || []).filter(stage => stage.enabled),
+        hideScores: state.ui.hideScores,
+        loadings: Object.keys(loadings).reduce((acc, state) => {
+            if (loadings[state]) return [...acc, state]
+            return acc
+        }, []),
+    }
+
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     fetchPicks: () => dispatch(picksActions.fetch()),
