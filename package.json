@@ -4,7 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "postinstall": "yarn run make-config",
         "start": "parcel index.html",
+        "make-config": "[ ! -f ./src/config.js ] && cp ./src/config.dist.js ./src/config.js || echo 'Config exists already'",
         "build": "parcel build index.html --no-cache",
         "make-prod": "parcel build index.html --public-url ./"
     },
