@@ -106,7 +106,7 @@ class Base extends React.Component {
                     />
                 </ScoreVisibilityToggle>
 
-                {stages.length > 0 && (
+                {stages.length > 0 && loadings.length == 0 && (
                     <div>
                         <ButtonsList>
                             {stages.map(stage => (

@@ -1,16 +1,40 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { animations } from '../../utils/style'
 
 export const competitorHeight = 3
 
 const Wrapper = styled.div`
     display: flex;
     align-items: center;
-    border-left: 0.4rem solid;
-    border-left-color: ${props => `#${props.border}` || 'transparent'};
+    padding-left: 0.4rem;
+    border-left-color: transparent;
     background-color: ${props => props.background || 'transparent'};
     color: rgb(51, 51, 51);
     overflow: hidden;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        background-color: ${props => `#${props.secondaryColor}` || ( props.background || 'white')};
+        top: 0;
+        bottom: 0;
+        animation: ${animations.lineFiller1} 400ms forwards ease-in-out;
+        z-index: 1;
+        transform: translate3d(0, 0, 0);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        background-color: ${props => `#${props.primaryColor}` || 'transparent'};
+        top: 0;
+        bottom: 0;
+        animation: ${animations.lineFiller2} 400ms forwards ease-in-out;
+        z-index: 1;
+        transform: translate3d(0, 0, 0);
+    }
 `
 
 const Logo = styled.img`
@@ -65,10 +89,10 @@ const Pick = styled.button`
 `
 
 const CompetitorLine = ({ competitor, background, score, winner, match, predict, matchPicks, ui }) => {
-    const { icon, name, primaryColor, id } = competitor
+    const { icon, name, primaryColor, secondaryColor, id } = competitor
 
     return (
-        <Wrapper border={primaryColor} background={background}>
+        <Wrapper primaryColor={primaryColor} secondaryColor={secondaryColor} background={background}>
             <Logo src={icon} alt={name}/>
             <Name>{name}</Name>
             {['althi', 'logo'].map(chronicler => {
