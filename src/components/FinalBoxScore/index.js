@@ -1,98 +1,69 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const StatBarContainer = styled.div`
-    display: flex;
-    width: 100%;
-    margin: 1rem auto;
-`
-
-const StatBarBar = styled.div`
-    position: relative;
-    flex: 0 0 50%;
-    height: 60px;
-`
-
-const StatBarFill = styled.div`
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    min-width: 125px;
-    z-index: 1;
-    width: ${props => `${props.size}%`};
-    transition: width ease-in-out 1s;
-
-    ${props => props.orientation === 'left' && `
-        background-color: rgb(255, 137, 0);
-        right: 0;
-    `}
-
-    ${props => props.orientation === 'right' && `
-        background-color: rgb(0, 160, 234);
-        left: 0;
-    `}
-`
-
-const StatBarStat = styled.div`
-    color: rgb(255, 255, 255);
-    display: flex;
-    padding-top: .075em;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    text-transform: uppercase;
-    align-items: center;
-
-    ${props => props.orientation === 'left' && `
-        right: 20px;
-    `}
-
-    ${props => props.orientation === 'right' && `
-        flex-direction: row-reverse;
-        background-color: rgb(0, 160, 234);
-        left: 20px;
-    `}
-`
-
-const StatBarChronicler = styled.span`
-    display: inline-block;
-    margin: 0 0.75rem;
-`
-
-const StatBarScore = styled.span`
-    display: inline-block;
-    font-size: 1.5rem;
-    font-weight: bold;
-`
-
 const FinalBoxScore = ({scores}) => {
-    const totalPoints = Object.keys(scores).reduce((total, chronicler) => {
-        return total + scores[chronicler]
-    }, 0)
+    const winner = Object.keys(scores).sort((a, b) => {
+        if (scores[a] > scores[b]) {
+            return -1
+        } else {
+            return 1
+        }
+    })[0]
+
+    const equality = Object.keys(scores).every(chronicler => {
+        const firstScore = scores[Object.keys(scores)[0]]
+        return scores[chronicler] === firstScore
+    });
 
     return (
-        <StatBarContainer>
-            {Object.keys(scores).map((chronicler, index) => (
-                <StatBarBar key={`score-${chronicler}`}>
-                    <StatBarFill
-                        orientation={index ? 'right': 'left'}
-                        size={(scores[chronicler] * 100 / totalPoints) || 0}
-                    />
+        <Wrapper>
+            {Object.keys(scores).map(chronicler => (
+                <Column key={`final-box-score-${chronicler}`}>
+                    <Score winning={winner === chronicler && !equality}>
+                        {scores[chronicler]}
+                    </Score>
 
-                    <StatBarStat orientation={index ? 'right': 'left'}>
-                        <StatBarChronicler>
-                            {chronicler}
-                        </StatBarChronicler>
-
-                        <StatBarScore>
-                            {scores[chronicler]}
-                        </StatBarScore>
-                    </StatBarStat>
-                </StatBarBar>
+                    <Chronicler winning={winner === chronicler && !equality} equality={equality}>
+                        {chronicler}
+                    </Chronicler>
+                </Column>
             ))}
-        </StatBarContainer>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.section`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-bottom: 3rem;
+`
+
+const Column = styled.div`
+    padding: 0 1rem;
+    text-align: center;
+`
+
+const Score = styled.h2`
+    margin: 0;
+    font-size: 3.5rem;
+    line-height: 1;
+    font-weight: ${props => props.winning ? 'bold' : 'normal'};
+`
+
+const Chronicler = styled.h3`
+    margin: 0;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: ${props => props.winning ? 'bold' : 'normal'};
+    ${props => props.winning ? `
+        color: rgb(255, 137, 0);
+    ` : ''}
+    ${props => props.equality ? `
+        color: rgb(0, 160, 234);
+    ` : ''}
+`
 
 export default FinalBoxScore
