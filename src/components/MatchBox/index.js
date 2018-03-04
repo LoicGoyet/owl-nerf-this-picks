@@ -5,9 +5,6 @@ import MatchCompetitor from '../../containers/MatchCompetitor'
 import {competitorHeight} from '../CompetitorLine'
 import moment from '../../utils/moment'
 
-const Wrapper = styled.article`
-`;
-
 const LabelWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
@@ -41,11 +38,9 @@ const MatchBox = ({match, ui}) => {
     if (competitors[0] == null || competitors[1] == null) return null
 
     return (
-        <Wrapper>
+        <article>
             <LabelWrapper>
-                <Label ui={ui}>
-                    pronostics
-                </Label>
+                <Label ui={ui}>pronostics</Label>
             </LabelWrapper>
 
             {competitors.length > 0 && competitors.map((competitor, index) => (
@@ -60,7 +55,7 @@ const MatchBox = ({match, ui}) => {
             <InfoWrapper>
                 <Info>{moment(startDateTS).format('LLLL')}</Info>
             </InfoWrapper>
-        </Wrapper>
+        </article>
     )
 }
 
