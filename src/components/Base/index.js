@@ -134,6 +134,7 @@ class Base extends React.Component {
                 )}
 
                 <FinalScore/>
+                <ToggleSwitch/>
 
                 <ScoreVisibilityToggle>
                     <ToggleSwitch
