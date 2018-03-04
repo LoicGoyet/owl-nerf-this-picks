@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import CountUp from 'react-countup';
 
 const FinalBoxScore = ({scores}) => {
     const winner = Object.keys(scores).sort((a, b) => {
@@ -20,7 +21,7 @@ const FinalBoxScore = ({scores}) => {
             {Object.keys(scores).map(chronicler => (
                 <Column key={`final-box-score-${chronicler}`}>
                     <Score winning={winner === chronicler && !equality}>
-                        {scores[chronicler]}
+                        <CountUp start={0} end={scores[chronicler]} duration={1}/>
                     </Score>
 
                     <Chronicler winning={winner === chronicler && !equality} equality={equality}>
