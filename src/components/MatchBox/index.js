@@ -40,8 +40,6 @@ const MatchBox = ({match, ui}) => {
     const { competitors, id, startDate, scores, winner, startDateTS } = match
     if (competitors[0] == null || competitors[1] == null) return null
 
-    console.log(ui);
-
     return (
         <Wrapper>
             <LabelWrapper>
