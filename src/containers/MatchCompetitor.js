@@ -17,15 +17,8 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
     predict: (gameId, chronicler, winner, points) => dispatch(picksActions.predict(gameId, chronicler, winner, points)),
 })
 
-const MatchCompetitor = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)((props) => (
-    <CompetitorLine {...props}/>
-))
-
-export default MatchCompetitor
+export default connect(mapStateToProps, mapDispatchToProps)(CompetitorLine)

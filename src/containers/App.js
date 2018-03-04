@@ -24,9 +24,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     toggleScoreVisibility: () => dispatch(uiActions.toggleScoreVisibility())
 })
 
-const App = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Base)
-
-export default App
+export default connect(mapStateToProps, mapDispatchToProps)(Base)

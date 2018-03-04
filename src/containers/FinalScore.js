@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import * as picksActions from '../ducks/picks'
 import FinalBoxScore from '../components/FinalBoxScore'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
     const stages = state.schedule.data.stages || []
 
     const matches = stages.reduce((matches, stage) => {
@@ -26,17 +26,8 @@ const mapStateToProps = (state, ownProps) => {
                 althi: scores.althi + ((althiPick.points || 0) * (winner === althiPick.winner || 0)),
                 logo: scores.logo + ((logoPick.points || 0) * (winner === logoPick.winner || 0)),
             }
-        }, {logo: 0, althi: 0})
+        }, { althi: 0, logo: 0 })
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({})
-
-const FinalScore = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)((props) => (
-    <FinalBoxScore {...props}/>
-))
-
-export default FinalScore
+export default connect(mapStateToProps)(FinalBoxScore)
