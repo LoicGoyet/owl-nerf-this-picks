@@ -59,7 +59,7 @@ const Wrapper = styled.div`
     justify-content: center;
     cursor: pointer;
     margin-bottom: 1rem;
-    max-width: 100%;
+    width: 100%;
 `
 
 const Label = styled.label`
@@ -70,7 +70,7 @@ const Label = styled.label`
     text-transform: uppercase;
     text-align: center;
     transition: all 300ms;
-    flex-grow: 1;
+    width: 100%;
     color: ${props => props.active ? `rgb(255, 137, 0)` : `inherit`};
     text-align: ${props => props.align};
     max-width: calc(100vw - 24.5px);

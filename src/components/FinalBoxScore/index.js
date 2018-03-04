@@ -38,12 +38,13 @@ const Wrapper = styled.section`
     align-items: center;
     margin-left: -1rem;
     margin-right: -1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 `
 
 const Column = styled.div`
     padding: 0 1rem;
     text-align: center;
+    width: 130px;
 `
 
 const Score = styled.h2`
