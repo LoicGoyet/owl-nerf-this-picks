@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Competitor, {competitorHeight} from '../Competitor'
+import MatchCompetitor from '../../containers/MatchCompetitor'
+import {competitorHeight} from '../CompetitorLine'
 import moment from '../../utils/moment'
 
 const Wrapper = styled.article`
@@ -15,12 +16,13 @@ const LabelWrapper = styled.div`
 const Label = styled.label`
     background-color: rgb(60, 60, 60);
     color: white;
-    margin-right: ${competitorHeight}rem;
+    transform: ${props => props.ui.hideScores ? `translateX(0)` : `translateX(-${competitorHeight}rem)`};
     width: ${competitorHeight * 2}rem;
     display: inline-block;
     text-align: center;
     font-size: 0.7em;
     padding: 0.2em;
+    transition: 300ms ease-in-out;
 `
 const InfoWrapper = styled.div`
     display: flex;
@@ -34,27 +36,26 @@ const Info = styled.div`
     padding: 0.2em 0.6em;
 `
 
-const MatchBox = ({ predict, match, matchPicks }) => {
+const MatchBox = ({match, ui}) => {
     const { competitors, id, startDate, scores, winner, startDateTS } = match
-
     if (competitors[0] == null || competitors[1] == null) return null
+
+    console.log(ui);
 
     return (
         <Wrapper>
             <LabelWrapper>
-                <Label>pronostics</Label>
+                <Label ui={ui}>
+                    pronostics
+                </Label>
             </LabelWrapper>
 
             {competitors.length > 0 && competitors.map((competitor, index) => (
-                <Competitor
+                <MatchCompetitor
                     key={`${id}-${competitor.id}`}
+                    match={match}
                     competitor={competitor}
-                    background={index ? 'rgb(240, 240, 240)' : 'rgb(254, 255, 253)'}
-                    score={scores[index].value}
-                    winner={winner && (winner.name === competitor.name)}
-                    matchId={id}
-                    predict={predict}
-                    matchPicks={matchPicks}
+                    isHome={index ? true : false}
                 />
             ))}
 

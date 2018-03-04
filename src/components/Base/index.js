@@ -87,6 +87,11 @@ const SignatureLink = styled.a`
     }
 `
 
+const ScoreVisibilityToggle = styled.nav`
+    text-align: center;
+    margin: 2rem auto;
+`
+
 class Base extends React.Component {
     constructor(props) {
         super(props)
@@ -116,7 +121,7 @@ class Base extends React.Component {
     }
 
     render() {
-        const { loadings } = this.props
+        const { loadings, toggleScoreVisibility, hideScores } = this.props
         const { activeStage } = this.state
         const stages = this.props.stages.filter(stage => stage.name !== "Présaison")
 
@@ -129,7 +134,14 @@ class Base extends React.Component {
                 )}
 
                 <FinalScore/>
-                <ToggleSwitch/>
+
+                <ScoreVisibilityToggle>
+                    <ToggleSwitch
+                        enabled={hideScores}
+                        onClick={toggleScoreVisibility}
+                        labels={['montrer les scores', 'no spoilers']}
+                    />
+                </ScoreVisibilityToggle>
 
                 {stages.length > 0 && (
                     <div>

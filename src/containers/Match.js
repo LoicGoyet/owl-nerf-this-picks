@@ -5,22 +5,9 @@ import * as picksActions from '../ducks/picks'
 import MatchBox from '../components/MatchBox'
 
 const mapStateToProps = (state, ownProps) => ({
-    matchPicks: state.picks.find(matchPicks => matchPicks.gameId === ownProps.match.id)
+    ui: state.ui
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    predict: (gameId, chronicler, winner, points) => dispatch(picksActions.predict(gameId, chronicler, winner, points)),
-})
+const mapDispatchToProps = (dispatch, ownProps) => ({})
 
-const Match = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)((props) => (
-    <MatchBox
-        match={props.match}
-        predict={props.predict}
-        matchPicks={props.matchPicks}
-    />
-))
-
-export default Match
+export default connect(mapStateToProps, mapDispatchToProps)(props => <MatchBox {...props}/>)

@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const Wrapper = styled.button`
     font-size: .875rem;
     background: rgb(255, 255, 255);
-    border-left: 1px solid rgba(51,51,51,.06);
+    border: 1px solid rgba(51,51,51,0.2);
+    border-left: 0;
     padding: 0 .625rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -13,6 +14,13 @@ const Wrapper = styled.button`
     color: rgb(51, 51, 51);
     cursor: pointer;
     position: relative;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+
+    &:first-child {
+        border-left: 1px solid rgba(51,51,51,.2);
+    }
 
     &:hover {
         color: rgb(255, 137, 0);

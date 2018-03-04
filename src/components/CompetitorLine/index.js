@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     border-left-color: ${props => `#${props.border}` || 'transparent'};
     background-color: ${props => props.background || 'transparent'};
     color: rgb(51, 51, 51);
+    overflow: hidden;
 `
 
 const Logo = styled.img`
@@ -38,6 +39,8 @@ const Score = styled.div`
     background-color: ${props => props.winner ? 'rgb(255, 137, 0)' : 'rgba(0, 0, 0, 0.25)'};
     color: white;
     flex-shrink: 0;
+    transform: ${props => props.ui.hideScores ? `translateX(${competitorHeight}rem)` : `translateX(0)`};
+    transition: 300ms ease-in-out;
 `
 
 const Pick = styled.button`
@@ -53,15 +56,16 @@ const Pick = styled.button`
     padding: 0;
     font-size: 0.8em;
     cursor: pointer;
+    transform: ${props => props.ui.hideScores ? `translateX(${competitorHeight}rem)` : `translateX(0)`};
+    transition: 300ms ease-in-out;
 
     &:focus {
         outline-width: 0;
     }
 `
 
-const Competitor = ({ competitor, background, score, winner, matchId, predict, matchPicks }) => {
+const CompetitorLine = ({ competitor, background, score, winner, match, predict, matchPicks, ui }) => {
     const { icon, name, primaryColor, id } = competitor
-
 
     return (
         <Wrapper border={primaryColor} background={background}>
@@ -88,21 +92,23 @@ const Competitor = ({ competitor, background, score, winner, matchId, predict, m
 
                 return (
                     <Pick
-                        key={`match-${matchId}--competitor-${id}--chronicler-${chronicler}`}
-                        onClick={() => predict(matchId, chronicler, id, futurePoints)}
+                        key={`match-${match.id}--competitor-${id}--chronicler-${chronicler}`}
+                        onClick={() => predict(match.id, chronicler, id, futurePoints)}
                         bgcolor={bgColor}
+                        ui={ui}
                     >
                         {chronicler.charAt(0).toUpperCase()}
                     </Pick>
                 )
             })}
-            <Score winner={winner}>{score}</Score>
+
+            <Score ui={ui} winner={winner}>{score}</Score>
         </Wrapper>
     )
 }
 
-Competitor.defaultProps = {
+CompetitorLine.defaultProps = {
     matchPicks: {},
 }
 
-export default Competitor
+export default CompetitorLine

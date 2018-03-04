@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StatBarContainer = styled.div`
     display: flex;
     width: 100%;
-    margin: 1rem auto 3rem;
+    margin: 1rem auto;
 `
 
 const StatBarBar = styled.div`

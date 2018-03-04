@@ -100,6 +100,7 @@ const FakeInput = styled.div`
         box-shadow: 0 0 14px 0 rgba(0,0,0,.11);
         transition: transform 400ms cubic-bezier(.19,1,.22,1);
         border: 1px solid rgba(51, 51, 51, 0.4);
+        left: 0;
         transform: ${props => props.enabled ? `translateX(28px)` : `translateX(-1px)`};
     }
 `
