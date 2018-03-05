@@ -70,6 +70,7 @@ class Base extends React.Component {
         this.props.fetchPicks()
         this.props.fetchSchedule()
         this.props.fetchTeams()
+        this.props.fetchRanking()
     }
 
     componentDidUpdate() {

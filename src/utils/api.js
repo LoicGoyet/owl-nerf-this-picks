@@ -11,7 +11,13 @@ const fetchTeams = () =>
         .then(response => response.json())
         .catch(error => error)
 
+const fetchRanking = () =>
+    api('ranking')
+        .then(response => response.json())
+        .catch(error => error)
+
 export default {
     fetchSchedule,
     fetchTeams,
+    fetchRanking,
 }

@@ -34,7 +34,7 @@ const Info = styled.div`
 `
 
 const MatchBox = ({match, ui}) => {
-    const { competitors, id, startDate, scores, winner, startDateTS } = match
+    const { competitors, id, startDate, scores, winner, startDateTS, state } = match
     if (competitors[0] == null || competitors[1] == null) return null
 
     return (
@@ -49,6 +49,7 @@ const MatchBox = ({match, ui}) => {
                     match={match}
                     competitor={competitor}
                     isHome={index ? true : false}
+                    pending={state === 'PENDING'}
                 />
             ))}
 

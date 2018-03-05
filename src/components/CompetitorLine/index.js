@@ -47,7 +47,7 @@ const Logo = styled.img`
 const Name = styled.h3`
     font-size: 1.25rem;
     margin: 0.125em 0 0;
-    flex-grow: 1;
+    flex-grow: ${props => props.pending ? 'initial' : 1};
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -88,13 +88,44 @@ const Pick = styled.button`
     }
 `
 
-const CompetitorLine = ({ competitor, background, score, winner, match, predict, matchPicks, ui }) => {
+const Stats = styled.div`
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    margin: 0.26em 0 0;
+    padding-left: 0.25rem;
+    padding-right: 0.5rem;
+`
+
+const Ranking = styled.div`
+    font-style: italic;
+    font-size: 0.7rem;
+    flex-grow: 1;
+`
+
+const Record = styled.div`
+    margin-left: 0.25rem;
+    transform: ${props => props.ui.hideScores ? `translateX(${competitorHeight}rem)` : `translateX(0)`};
+    transition: 300ms ease-in-out;
+`
+
+const CompetitorLine = ({ competitor, background, score, winner, match, predict, matchPicks, ui, records, ...props }) => {
     const { icon, name, primaryColor, secondaryColor, id } = competitor
 
     return (
         <Wrapper primaryColor={primaryColor} secondaryColor={secondaryColor} background={background}>
             <Logo src={icon} alt={name}/>
-            <Name>{name}</Name>
+            <Name pending={props.pending}>{name}</Name>
+
+            {props.pending && (
+                <Stats>
+                    <Ranking>({props.placement})</Ranking>
+                    <Record ui={ui}>
+                        {records.matchWin}-{records.matchLoss}{records.matchDraw ? `-${records.matchDraw}` : '' }
+                    </Record>
+                </Stats>
+            )}
+
             {['althi', 'logo'].map(chronicler => {
                 const pick = matchPicks[chronicler] || {}
                 const picked = pick.winner === id;
@@ -120,6 +151,7 @@ const CompetitorLine = ({ competitor, background, score, winner, match, predict,
                         onClick={() => predict(match.id, chronicler, id, futurePoints)}
                         bgcolor={bgColor}
                         ui={ui}
+                        pending={props.pending}
                     >
                         {chronicler.charAt(0).toUpperCase()}
                     </Pick>
