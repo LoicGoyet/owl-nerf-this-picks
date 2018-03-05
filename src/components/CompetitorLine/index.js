@@ -31,7 +31,7 @@ const Wrapper = styled.div`
         background-color: ${props => `#${props.primaryColor}` || 'transparent'};
         top: 0;
         bottom: 0;
-        animation: ${animations.lineFiller2} 400ms forwards ease-in-out;
+        animation: ${animations.lineFillerBand} 400ms forwards ease-in-out;
         z-index: 1;
         transform: translate3d(0, 0, 0);
     }
@@ -82,6 +82,10 @@ const Pick = styled.button`
     cursor: pointer;
     transform: ${props => props.ui.hideScores ? `translateX(${competitorHeight}rem)` : `translateX(0)`};
     transition: 300ms ease-in-out;
+    ${props => !props.slide ? `
+        transform: none;
+    ` : ``}
+
 
     &:focus {
         outline-width: 0;
@@ -105,8 +109,6 @@ const Ranking = styled.div`
 
 const Record = styled.div`
     margin-left: 0.25rem;
-    transform: ${props => props.ui.hideScores ? `translateX(${competitorHeight}rem)` : `translateX(0)`};
-    transition: 300ms ease-in-out;
 `
 
 const CompetitorLine = ({ competitor, background, score, winner, match, predict, matchPicks, ui, records, ...props }) => {
@@ -151,14 +153,16 @@ const CompetitorLine = ({ competitor, background, score, winner, match, predict,
                         onClick={() => predict(match.id, chronicler, id, futurePoints)}
                         bgcolor={bgColor}
                         ui={ui}
-                        pending={props.pending}
+                        slide={!props.pending}
                     >
                         {chronicler.charAt(0).toUpperCase()}
                     </Pick>
                 )
             })}
 
-            <Score ui={ui} winner={winner}>{score}</Score>
+            {!props.pending && (
+                <Score ui={ui} winner={winner}>{score}</Score>
+            )}
         </Wrapper>
     )
 }
