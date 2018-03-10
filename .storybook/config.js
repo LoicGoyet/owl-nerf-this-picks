@@ -1,19 +1,20 @@
-import React from 'react'
-import { configure, addDecorator } from '@storybook/react'
-import { setOptions } from '@storybook/addon-options'
-import { withInfo, setDefaults } from '@storybook/addon-info'
+import React from 'react';
+import {configure, addDecorator} from '@storybook/react';
+import {setOptions} from '@storybook/addon-options';
+import {withInfo, setDefaults} from '@storybook/addon-info';
 
-import BaseStyle from '../src/components/BaseStyle'
-
+import BaseStyle from '../src/components/BaseStyle';
 
 // automatically import all files ending in *.stories.js
 const req = require.context('../src/components', true, /stories.js$/);
 function loadStories() {
-  req.keys().forEach((filename) => req(filename));
+  req.keys().forEach(filename => req(filename));
 }
 
+addDecorator(story => <div style={{padding: '1rem'}}>{story()}</div>);
+
 // Info Addon
-addDecorator((story, context) => withInfo('common info')(story)(context))
+addDecorator((story, context) => withInfo()(story)(context));
 setDefaults({
   inline: true, // Displays info inline vs click button to view
   source: true, // Displays the source of story Component
@@ -39,7 +40,7 @@ setOptions({
 });
 
 // Base Style
-addDecorator(story => <BaseStyle>{story()}</BaseStyle>)
-
+addDecorator(story => <BaseStyle>{story()}</BaseStyle>);
+addDecorator(story => <div style={{padding: '1rem'}}>{story()}</div>);
 
 configure(loadStories, module);

@@ -1,10 +1,10 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import {connect} from 'react-redux';
 
-import MatchBox from '../components/MatchBox'
+import MatchBox from '../components/MatchBox';
 
 const mapStateToProps = state => ({
-    ui: state.ui
-})
+  ui: state.ui,
+});
 
-export default connect(mapStateToProps)(MatchBox)
+export default connect(mapStateToProps)(MatchBox);
