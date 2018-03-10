@@ -11,9 +11,10 @@ const mapStateToProps = (state, ownProps) => {
 
   if (focusTeams.length) {
     matches = ownProps.matches.filter(match => {
-      const awayTeam = match.competitors[0].id;
-      const homeTeam = match.competitors[1].id;
-      return focusTeams.includes(awayTeam) || focusTeams.includes(homeTeam);
+      const awayTeam = match.competitors[0];
+      const homeTeam = match.competitors[1];
+      if (homeTeam == null || awayTeam == null) return false;
+      return focusTeams.includes(awayTeam.id) || focusTeams.includes(homeTeam.id);
     });
   }
 

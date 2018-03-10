@@ -22,12 +22,12 @@ export default function reducer(state = defaultState, action) {
       if (removeTeam) {
         return {
           ...state,
-          focusTeams: state.focusTeams.filter(teamId => teamId !== action.teamId),
+          focusTeams: [],
         };
       } else {
         return {
           ...state,
-          focusTeams: [...state.focusTeams, action.teamId],
+          focusTeams: [action.teamId],
         };
       }
 
